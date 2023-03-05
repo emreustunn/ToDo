@@ -20,16 +20,20 @@ import static com.emre.constants.EndPoints.*;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+
+    //Yeni bir kullanıcı kayıt eder.
     @GetMapping(SAVE)
     public ResponseEntity<String> save(UserSaveRequestDto dto){
         userService.saveDto(dto);
         return ResponseEntity.ok("Ok.");
     }
+    //Userin kullanıcı adi ve şifresi doğru mu diye kontrol eder.
     @GetMapping(LOGIN)
     public Boolean doLogin(UserLoginRequestDto dto){
         return userService.doLogin(dto);
     }
 
+    //Databasede kayıtlı olan bütün kullanıcıları getirir.
     @PostMapping(GETALL)
     public ResponseEntity<List<UserFindAllResponseDto>> findAll(){
         return ResponseEntity.ok(userService.findAllResponseDtos());
